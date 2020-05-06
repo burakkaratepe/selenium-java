@@ -1,7 +1,12 @@
-package page.objects;
+/*
+ * created by bkaratepe at 20/05/04
+ */
+
+package page.objects.Login;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import page.objects.AbstractPageObject;
 
 public class LoginPage extends AbstractPageObject {
 
@@ -17,7 +22,7 @@ public class LoginPage extends AbstractPageObject {
     @FindBy(xpath = "//input[@type='email']")
     private WebElement email;
 
-    @FindBy(xpath = "//input[@type='password]")
+    @FindBy(xpath = "//input[@type='password']")
     private WebElement password;
 
     @FindBy(xpath = "//button[@type='submit']")
@@ -26,23 +31,18 @@ public class LoginPage extends AbstractPageObject {
     @FindBy(linkText = "Forgot your password?")
     private WebElement forgotPassword;
 
-    @FindBy(css = "p.contains('Don't have an account?')")
+    @FindBy(xpath = "//p[contains(text(),'have an account?')]")
     private WebElement noAccountLabel;
 
     @FindBy(linkText = "Sign up")
     private WebElement singUp;
 
-    public LoginPage verifyAllElementsAreDisplaying() {
-        this.pLogo.isDisplayed();
-        this.titleLabel.isDisplayed();
-        this.googleSignButton.isDisplayed();
-        this.email.isDisplayed();
-        this.password.isDisplayed();
-        this.continueButton.isDisplayed();
-        this.forgotPassword.isDisplayed();
-        this.noAccountLabel.isDisplayed();
-        this.singUp.isDisplayed();
-        return this;
+    public boolean verifyAllElementsAreDisplaying() {
+        if (email.isDisplayed()
+        || password.isDisplayed()
+        || continueButton.isDisplayed())
+            return true;
+        return false;
     }
 
     public LoginPage fillEmail (String userEmail) {

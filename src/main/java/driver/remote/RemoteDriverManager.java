@@ -1,27 +1,3 @@
-/*
- * MIT License
- *
- * Copyright (c) 2018 Elias Nogueira
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
- */
-
 package driver.remote;
 
 import config.Configuration;
@@ -37,9 +13,10 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.opera.OperaOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
-
 import java.net.MalformedURLException;
 import java.net.URL;
+
+import static test.TestListener.LOGGER;
 
 @Log4j2
 public class RemoteDriverManager implements IDriver {
@@ -54,10 +31,10 @@ public class RemoteDriverManager implements IDriver {
 
             remoteWebDriver = new RemoteWebDriver(new URL(gridURL), getCapability(browser));
         } catch (MalformedURLException e) {
-            log.error("Grid URL is invalid or Grid is not available");
-            log.error("Browser: " +  browser, e);
+            LOGGER.error("Grid URL is invalid or Grid is not available");
+            LOGGER.error("Browser: " +  browser, e);
         } catch (IllegalArgumentException e) {
-            log.error("Browser: " +  browser + "is not valid or recognized", e);
+            LOGGER.error("Browser: " +  browser + "is not valid or recognized", e);
         }
 
         return remoteWebDriver;
