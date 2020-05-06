@@ -21,27 +21,20 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+package test;
 
-package enums;
+import org.testng.annotations.Test;
+import page.objects.Login.LoginPage;
 
-import java.util.Random;
+public class VerifyLogin extends BaseWeb {
 
-public enum RoomType {
-
-    SINGLE("Single"), FAMILY("Family"), BUSINESS("Business");
-
-    private final String value;
-
-    RoomType(String value) {
-        this.value = value;
-    }
-
-    public static RoomType getRandom() {
-        return values()[new Random().nextInt(values().length)];
-    }
-
-    @Override
-    public String toString() {
-        return value;
+    @Test(description = "Verfifies Login Page Functionality")
+    public void verifyLogin() throws InterruptedException {
+        LoginPage loginPage = new LoginPage();
+        if (!loginPage.verifyAllElementsAreDisplaying())
+            return;
+        loginPage.fillEmail("email");
+        loginPage.fillPassword("***");
+        Thread.sleep(2000);
     }
 }
